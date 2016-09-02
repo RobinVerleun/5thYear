@@ -1,0 +1,21 @@
+CMPUT 391: Database Management Systems
+Professor: Denlison Barbosa
+
+Tips from the prof: "The most powerful tool for coding is pen and paper - if you start C code with an editor, you're wrong."
+
+-Need to download and compile SQLite version 3.
+
+One Size doesn't fit all
+	-OLAP vs OLTP (Online Analytical Processing vs Online Transaction Processing)
+	-My needs don't work like Google's needs
+
+Different Computing affects the Requirements of the Data Management System
+	-Single user vs multi-user
+	-Critical vs casual application (Facebook vs Banking)
+
+-Will be tested but not taught:
+	-ER Modelling
+	-SQL
+	-Algebra
+	-Normalization
+	-Programming

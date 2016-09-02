@@ -1,0 +1,10 @@
+Goal for Monday, September 5th
+
+-Study ER Modelling, SQL, and Normalization
+-Download SQLite on Ubuntu for laptop
+
+
+-Finish week 1 of COMP 361
+-Buy books and complete readings for PHIL
+
+-Crack open and begin week 1 of COMP 369

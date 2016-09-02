@@ -1,4 +1,4 @@
-PHIL 265 : "Philosophy of Science"
+wPHIL 265 : "Philosophy of Science"
 Professor: Hassan
 
 What is Science?

@@ -43,3 +43,7 @@ Section 1: From Beginning to End - An Overview of Systems Analysis and Design
 	
 	-Agile Development: Information System Dev. process emphasizing flexibility.
 	-Key element of iterative development: choose solution parts that can be done in two or four weeks.
+	
+	1. Fact finding and user involvement - discussing with users to identify primary use cases.
+	2. Identifying use cases - use cases cover a single transaction/use by a user
+	3. Identifying Object Classes - during interviews with product managers and user, identify nouns to be used as object developments.

@@ -31,8 +31,8 @@ extended or people hired.
 10. 
 
 11. Use cases help provide information about classes and properties by utlizing nouns 
-and adjectives. Use case diagrams help to determine when UI elements will be 
-important for capturing or displaying data.
+and adjectives. Use case diagrams help to build activity diagrams (workflow) by showing how
+users will intend to use the program - therefore designing relationships between classes.
 
 12. A class diagram shows the relationships and interactions between different classes
 within a project. 
@@ -40,4 +40,25 @@ within a project.
 13. Use case diagram and class diagram begin the process of developing at a low level,
 allowing mid level and low level planning to begin.
 
-14. 
+14. An activity diagram is also known as a workflow diagram. It shows the logical flow from 
+class to class during regular operation of the program.
+
+15. An activity diagram will show UI elements where one system crosses into another system - each 
+time that happens, information is either shown or captured through UI elements.
+
+16. Architecutral design is intended to provide focus for the projects - tablet, mobile, 
+desktop, web. Will a database be used? Local storage? Internet? This is all determined beforehand.
+
+17. A design class diagram shows which classes have access to elements of other classes.
+
+18. Design teests - run tests - if they failed, document errors - fix issues - run tests 
+- repeat until complete.
+
+19. User acceptance testing allows users to actually work with the program, allowing direct 
+feedback from clients.
+
+20. Seperate iterations allow room for change. By working in iterations, new needs can be assessed
+and old needs corrected.
+
+21. To complete the basics of a system as it is understood currently, and create a solution
+which is extendible to further needs.

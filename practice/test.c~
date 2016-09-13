@@ -1,0 +1,44 @@
+#include <stdlib.h>
+#include <allegro5/allegro.h>
+
+int main(void)
+{
+	int x,y,x1,y1,x2,y2;
+	int red, green, blue, color;
+	
+	allegro_init();
+	
+	install_keyboard();
+	
+	srand(time(NULL));
+	
+	int ret = set_gfx_mod(GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0);
+	
+	if(ret != 0) {
+		allegro_message(allegro_error);
+		return 1;
+	}
+	
+	textprintf_ex(screen, font, 0, 0, 15, -1,
+		"Pixels Program - %dx%d - Press ESC to quit",
+		SCREEN_W, SCREEN_H);
+		
+	while(!key(KEY_ESC))
+	{
+		x = 10 + rand() % (SCREEN_W-20);
+		y = 10 + rand() % (SCREEN_H-20);
+		
+		red = rand() % 255;
+		green = rand() % 255;
+		blue = rand() % 255;
+		color = makecol(red,green,blue);
+		
+		putpixel(screen, x, y, color);
+	}
+	
+	allegro_exit();
+	return 0;
+}
+
+END_OF_MAIN();
+

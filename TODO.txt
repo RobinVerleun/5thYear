@@ -1,10 +1,21 @@
-Goal for Monday, September 5th
+Goal for Saturday, Sept. 17
 
 -Study ER Modelling, SQL, and Normalization
--Download SQLite on Ubuntu for laptop
 
 
--Finish week 1 of COMP 361
--Buy books and complete readings for PHIL
+PHIL 265:
+	-Read all scientific explanation papers
+		-ph 651->656
+		-pg 657-666
+		-pg 711-734
+	-Sept 15 + 20th readings, total of 4 readings
+	
+	-Begin draft ideas for paper
+	
+ECE 321
+	-Read papers pertaining to assignment
+	-Begin planning for assignment work
+	
+CMPUT 391
+	-Have knowledge how to begin and implement SQLite statements.
 
--Crack open and begin week 1 of COMP 369

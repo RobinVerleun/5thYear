@@ -1,0 +1,13 @@
+sqlite3 assignment1.db
+
+create table airports(airport_ID int, name varchar(50), city varchar(50), country varchar(50), IATA_FAA varchar(3), ICAO varchar(4), latitude double, longtitude double, altitude double, timezone double, DST varchar(1), Tz_database_time_zone varchar(50));
+
+create table airlines(airline_ID int, name varchar(50), alias varchar(5), IATA varchar(2), ICAO varchar(3), callsign varchar(50), country varchar(50), active varchar(1));
+
+create table routes(airline varchar(3), airline_id int, source_airport varchar(4), source_airport_id int, destination airport varchar(4), destination_airport_id int, codeshare varchar(1), stops int, equipment varchar(50));
+
+.seperator ","
+
+.import airports.dat airports
+.import airlines.dat airlines
+.import routes.dat routes

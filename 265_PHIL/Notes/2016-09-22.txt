@@ -1,0 +1,21 @@
+Limits of Falsificqationism
+	->Logic Problems
+	->Unable to determine bad from good theories
+	->Inadequate account of history
+
+	Example:
+		Water = H20
+		T -> O
+		~O
+	---------------
+	therf. ~T
+
+Observation Statements:
+	->Theory dependent and fallible
+	->Different ppl, different observations based on background
+
+	 ->Measurements and observations are imprecise
+	 ->If value does not match predicted, not allowed to reject hypothesis
+
+	 ->Falsification is too permissive or too narrow 
+	 	-> Widely generic statements allow too much to get through

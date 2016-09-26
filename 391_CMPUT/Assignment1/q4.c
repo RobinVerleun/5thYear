@@ -3,6 +3,14 @@
 #include <math.h>
 #include <sqlite3.h>
 
+#define AIRLINE_COL 0
+#define SRC_AIRPORT_COL 1
+#define DEST_AIRPORT_COL 2
+#define SRC_LAT_COL 3
+#define SRC_LONG_COL 4
+#define DEST_LAT_COL 5
+#define DEST_LONG_COL 6
+
 typedef struct {
 	int airline_ID;
 	int source_airport_ID;
@@ -14,6 +22,7 @@ typedef struct {
 double calculateDistance(double, double, double, double);
 double degrees_to_radians(double);
 void sort_routes(routeInformation *, int);
+void print_routes(routeInformation *);
 
 int main(int argc, char ** argv)
 {
@@ -35,7 +44,8 @@ int main(int argc, char ** argv)
 
 		char * sql_stmt1 = 	"SELECT count(*) "
 							"FROM routes f, airports a1, airports a2, airlines l "
-							"WHERE l.ICAO IS NOT NULL AND l.IATA IS NOT NULL "
+							"WHERE "
+								"l.ICAO IS NOT NULL AND l.IATA IS NOT NULL "
 								"AND l.callsign IS NOT NULL AND l.country IS NOT NULL "
 								"AND l.airline_id = f.airline_id "
 								"AND f.source_airport_id = a1.airport_ID "
@@ -45,16 +55,15 @@ int main(int argc, char ** argv)
 		char * sql_stmt2 =	"SELECT f.airline_id, f.source_airport_id, f.destination_airport_id, "
 								"a1. latitude, a1.longtitude, a2.latitude, a2.longtitude "
 							"FROM routes f, airports a1, airports a2, airlines l "
-							"WHERE l.ICAO IS NOT NULL AND l.IATA IS NOT NULL "
+							"WHERE "
+								"l.ICAO IS NOT NULL AND l.IATA IS NOT NULL "
 								"AND l.callsign IS NOT NULL AND l.country IS NOT NULL "
 								"AND l.airline_id = f.airline_id "
 								"AND f.source_airport_id = a1.airport_ID "
 								"AND f.destination_airport_id = a2.airport_id;";
 
-		//Check return code for preparation of sql stmt
 		rc = sqlite3_prepare_v2(db, sql_stmt1, -1, &stmt, 0);
 
-		//Print error in case statement prepare fails
 		if (rc != SQLITE_OK) 
 		{
 			fprintf(stderr, "Preparation failed: %s\n", sqlite3_errmsg(db));
@@ -62,7 +71,8 @@ int main(int argc, char ** argv)
 			return(1);
 		}
 
-		//Get the count from the count statement
+		//Get the count from the count statement - throw an error if it fails
+		//because the count is critical
 		if(sqlite3_step(stmt) == SQLITE_ROW) 
 		{
 			row_count = sqlite3_column_int(stmt, 0);
@@ -85,14 +95,14 @@ int main(int argc, char ** argv)
 		{
 			if(sqlite3_step(stmt) == SQLITE_ROW)
 			{
-				routeInfo[row].airline_ID = sqlite3_column_int(stmt, 0);
-				routeInfo[row].source_airport_ID = sqlite3_column_int(stmt, 1);
-				routeInfo[row].destination_airport_ID = sqlite3_column_int(stmt, 2);
+				routeInfo[row].airline_ID = sqlite3_column_int(stmt, AIRLINE_COL);
+				routeInfo[row].source_airport_ID = sqlite3_column_int(stmt, SRC_AIRPORT_COL);
+				routeInfo[row].destination_airport_ID = sqlite3_column_int(stmt, DEST_AIRPORT_COL);
 				routeInfo[row].distance = 
-					calculateDistance(sqlite3_column_double(stmt, 3),
-										sqlite3_column_double(stmt, 4),
-										sqlite3_column_double(stmt, 5),
-										sqlite3_column_double(stmt, 6));
+					calculateDistance(sqlite3_column_double(stmt, SRC_LAT_COL),
+										sqlite3_column_double(stmt, SRC_LONG_COL),
+										sqlite3_column_double(stmt, DEST_LAT_COL),
+										sqlite3_column_double(stmt, DEST_LONG_COL));
 				
 			} 
 			else 
@@ -104,12 +114,7 @@ int main(int argc, char ** argv)
 		}
 
 		sort_routes(routeInfo, row_count);
-
-		/*
-		for(row = 0; row < row_count; row++){
-			printf("%d, %d, %d, %f \n", routeInfo[row].airline_ID, routeInfo[row].source_airport_ID, routeInfo[row].destination_airport_ID, routeInfo[row].distance);
-		}
-		*/
+		print_routes(routeInfo);
 
 		sqlite3_finalize(stmt);
 }
@@ -152,12 +157,20 @@ void sort_routes(routeInformation * routeInfo, int count)
 			} 
 		}
 	}
-
-	for(row = 0; row < 10; row++){
-		printf("%d, %d, %d, %f \n", routeInfo[row].airline_ID, routeInfo[row].source_airport_ID, routeInfo[row].destination_airport_ID, routeInfo[row].distance);
-	}
 }
 
+void print_routes(routeInformation * routeInfo)
+{
+	int row;
+	for(row = 0; row < 10; row++){
+		printf("Route Identifier (Airline ID, Source Airport ID, Destination Airport ID): " 
+			"%d | %d | %d | Distance (m): %f \n", 
+			routeInfo[row].airline_ID, 
+			routeInfo[row].source_airport_ID,
+			routeInfo[row].destination_airport_ID,
+			routeInfo[row].distance);
+	}
+}
 
 
 

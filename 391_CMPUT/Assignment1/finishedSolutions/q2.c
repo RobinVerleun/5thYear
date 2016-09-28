@@ -25,15 +25,24 @@ int main(int argc, char ** argv)
 		//First block gets all active, commerical airports with international travel
 		char *sql_stmt = 	"SELECT f.airline_id, f.source_airport_id, f.destination_airport_id "
 							"FROM routes f, airports a1, airports a2, airlines l "
-							"WHERE f.source_airport_id = a1.airport_id AND f.destination_airport_id = a2.airport_id "
-								"AND a1.country != a2.country AND l.active = 'Y' AND l.IATA IS NOT NULL "
-								"AND l.ICAO IS NOT NULL AND l.callsign IS NOT NULL AND l.country IS NOT NULL "
-								"AND l.airline_id = f.airline_id "
+							"WHERE "
+								"f.source_airport_id = a1.airport_id AND "
+								"f.destination_airport_id = a2.airport_id "
+								"AND a1.country != a2.country AND "
+								"l.active = 'Y' AND "
+								"l.IATA IS NOT NULL AND "
+								"l.ICAO IS NOT NULL AND "
+								"l.callsign IS NOT NULL AND "
+								"l.country IS NOT NULL AND "
+								"l.airline_id = f.airline_id "
 							"EXCEPT "
 							//Removes all reciprocal flights from the result
 								"SELECT r1.airline_id, r1.source_airport_id, r1.destination_airport_id "
-								"FROM routes r1 JOIN routes r2 ON r1.airline_id = r2.airline_id "
-								"WHERE r1.source_airport = r2.destination_airport AND r2.source_airport = r1.destination_airport;";
+								"FROM routes r1 JOIN routes r2 "
+									"ON r1.airline_id = r2.airline_id "
+								"WHERE "
+									"r1.source_airport = r2.destination_airport AND "
+									"r2.source_airport = r1.destination_airport;";
 
 		//Check return code for preparation of sql stmt
 		rc = sqlite3_prepare_v2(db, sql_stmt, -1, &stmt, 0);

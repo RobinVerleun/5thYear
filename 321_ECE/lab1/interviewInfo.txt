@@ -1,0 +1,103 @@
+
+Note Taker: Take responses
+Questions: Luke, Andrew
+
+
+
+
+
+Interview Topics:
+
+Requirement Illicitation:
+	
+	Who is the user?
+		- People including children, no special use for blind or deaf
+		- Vehicles
+	Who is the customer?
+		-
+	Different needs for each?
+		-
+	
+	What currently exists and how does it work?
+		- The system is simple, using manual switches/hardware. 
+
+	What is your ideal system goals? (Need DEEPER questions)
+		- Automated using software. System takes into consideration every combination of lights with minimal problems
+		- Able is something goes wrong to go to emergency mode
+		- Work at night and during the day
+
+
+	Depending on the days and conditions, work differently?
+		- Yes
+
+	What kind  of traffic flow?
+		- Two main roads (1, 3) and road 2 is secondary road
+	Any safety issues (bridges, rails, etc)
+	What kind of speeds?
+	Early signage?
+	Is it on a hill?
+
+	Work on a timer or?
+		- State change will be combination of input
+		- PRevious state of all lights, perform state change.
+		- Diagram represents multiple inputs (lights 1, 2, 3), sensor s2, button b3, etc.
+			-Depending on these we alter states
+
+	Default state?
+		-Green light on road one, green light on pedestrian road 2
+		-Everything else red
+		-TImers will change the state of the system based on previous state and sensor inputs
+
+	How many states to move to from default system?
+		- Seven states
+			1. Default (Green light on p2, green light light #1, t1 should be on)
+			2. GreenG1 : (P1 green, G1 green, t1 off, t2 on)
+			3. Green3 : (L3 is green, green on g3, t1 off, t2 on)
+			4. GreenP3 : (L1 is green, p2 and p3 is green, t1 off, t2 on)
+			5. Green 2 and 3 : (L2 and L3 green, t1 off, t2 on)
+			NIGHTIME (Begins at 10pm to 6am)
+			6. Blinking Green: (L1 blinking green, l2 and l3 blinking red, pedestrian lights off, g1 and g3 off, t1 off, t2 off)
+			EMERGENCY
+			7. BLinking Green for L1, Blinking Red, pedestrian off, g1 and g3 off, t1 and t2 off, trigger ONLY on malfunction
+
+	How long are timers?
+		- 30s for timer 1, 15s for timer 2
+
+	Sounds at all?
+		-No, just lights
+
+	When should the system enter emergency?
+		- Any malfunction of the system
+		- Reset buttons returns to default
+
+
+
+
+	Questions for Diagram:
+		- What is s2 (and other icons)
+			-Detects if a car waiting to cross
+			-Depends on a combination of states with other 
+
+		- How many inputs to the system in general?
+			- 15
+			- s2 magnetic sensor
+			- pedestrian light p1,p2,p3
+			- lights l1, l2, l3
+			- g1 = green arrow controlling traffic road 1
+			- g3 " road 3 "
+			- b3 = pedestrian button to cross road
+			- t1, t2 = timers
+			- reset button
+			- hardware malfunction indput
+
+		- Lane Dynamics and function
+		- Light timings
+		- B3  - sounds?
+		- When do you left turn? Before or after?
+			-Left turns before open traffic
+
+
+Requirement Specification: 
+
+Requirement Validation and Verification:
+

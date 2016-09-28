@@ -10,6 +10,8 @@
 #define SRC_LONG_COL 4
 #define DEST_LAT_COL 5
 #define DEST_LONG_COL 6
+#define OPERATION_SUCCESS 0
+#define OPERATION_FAIL 1
 
 typedef struct {
 	int airline_ID;
@@ -21,6 +23,8 @@ typedef struct {
 //Prototyping
 double calculateDistance(double, double, double, double);
 double degrees_to_radians(double);
+int q4_query_GetCount(sqlite3 *, sqlite3_stmt *, int *);
+int q4_query_DistanceInfo(sqlite3 *, sqlite3_stmt *, routeInformation *, int);
 void sort_routes(routeInformation *, int);
 void print_routes(routeInformation *);
 
@@ -42,85 +46,26 @@ int main(int argc, char ** argv)
 			return(1);
 		}
 
-		char * sql_stmt1 = 	"SELECT count(*) "
-							"FROM routes f, airports a1, airports a2, airlines l "
-							"WHERE "
-								"l.ICAO IS NOT NULL AND l.IATA IS NOT NULL "
-								"AND l.callsign IS NOT NULL AND l.country IS NOT NULL "
-								"AND l.airline_id = f.airline_id "
-								"AND f.source_airport_id = a1.airport_ID "
-								"AND f.destination_airport_id = a2.airport_id;";
-
-
-		char * sql_stmt2 =	"SELECT f.airline_id, f.source_airport_id, f.destination_airport_id, "
-								"a1. latitude, a1.longtitude, a2.latitude, a2.longtitude "
-							"FROM routes f, airports a1, airports a2, airlines l "
-							"WHERE "
-								"l.ICAO IS NOT NULL AND l.IATA IS NOT NULL "
-								"AND l.callsign IS NOT NULL AND l.country IS NOT NULL "
-								"AND l.airline_id = f.airline_id "
-								"AND f.source_airport_id = a1.airport_ID "
-								"AND f.destination_airport_id = a2.airport_id;";
-
-		rc = sqlite3_prepare_v2(db, sql_stmt1, -1, &stmt, 0);
-
-		if (rc != SQLITE_OK) 
-		{
-			fprintf(stderr, "Preparation failed: %s\n", sqlite3_errmsg(db));
-			sqlite3_close(db);
-			return(1);
-		}
-
-		//Get the count from the count statement - throw an error if it fails
-		//because the count is critical
-		if(sqlite3_step(stmt) == SQLITE_ROW) 
-		{
-			row_count = sqlite3_column_int(stmt, 0);
-		} 
-		else 
-		{
-		 	fprintf(stderr, "Reading from result table failed: %s\n", sqlite3_errmsg(db));
-		 	sqlite3_close(db);
-		 	return(1);
+		rc = q4_query_GetCount(db, stmt, &row_count);
+		if( rc != OPERATION_SUCCESS ) {
+			return 1;
 		}
 
 		//Allocate space for reading in the result table
 		routeInfo = (routeInformation*) malloc(sizeof(routeInformation) * row_count);
 
-		//Prepare second sql statement
-		rc = sqlite3_prepare_v2(db, sql_stmt2, -1, &stmt, 0);
-
-		int row;
-		for(row = 0; row < row_count; row++)
-		{
-			if(sqlite3_step(stmt) == SQLITE_ROW)
-			{
-				routeInfo[row].airline_ID = sqlite3_column_int(stmt, AIRLINE_COL);
-				routeInfo[row].source_airport_ID = sqlite3_column_int(stmt, SRC_AIRPORT_COL);
-				routeInfo[row].destination_airport_ID = sqlite3_column_int(stmt, DEST_AIRPORT_COL);
-				routeInfo[row].distance = 
-					calculateDistance(sqlite3_column_double(stmt, SRC_LAT_COL),
-										sqlite3_column_double(stmt, SRC_LONG_COL),
-										sqlite3_column_double(stmt, DEST_LAT_COL),
-										sqlite3_column_double(stmt, DEST_LONG_COL));
-				
-			} 
-			else 
-			{
-				fprintf(stderr, "Reading from result table failed: %s\n", sqlite3_errmsg(db));
-				return (1);
-			}
-
+		rc = q4_query_DistanceInfo(db, stmt, routeInfo, row_count);
+		if( rc != OPERATION_SUCCESS ) {
+			return 1;
 		}
 
 		sort_routes(routeInfo, row_count);
 		print_routes(routeInfo);
 
-		sqlite3_finalize(stmt);
+		return 0;
 }
 
-double calculateDistance(double lat1, double long1, double lat2, double long2)
-{
+double calculateDistance(double lat1, double long1, double lat2, double long2) {
 	double lat1_rad = degrees_to_radians(lat1);
 	double lat2_rad = degrees_to_radians(lat2);
 	double delta_lat = lat2_rad - lat1_rad;
@@ -136,13 +81,80 @@ double calculateDistance(double lat1, double long1, double lat2, double long2)
 	return R * c;
 }
 
-double degrees_to_radians(double degrees) 
-{
+double degrees_to_radians(double degrees) {
 	return (degrees * M_PI) / 180;
 }
 
-void sort_routes(routeInformation * routeInfo, int count) 
-{
+int q4_query_GetCount(sqlite3 *db, sqlite3_stmt *stmt, int *row_count) {	
+	char * sql_stmt = 	"SELECT count(*) "
+						"FROM routes f, airports a1, airports a2, airlines l "
+						"WHERE "
+							"l.ICAO IS NOT NULL AND "
+							"l.IATA IS NOT NULL AND "
+							"l.callsign IS NOT NULL AND "
+							"l.country IS NOT NULL AND "
+							"l.airline_id = f.airline_id AND "
+							"f.source_airport_id = a1.airport_ID AND "
+							"f.destination_airport_id = a2.airport_id;";
+
+	if (sqlite3_prepare_v2(db, sql_stmt, -1, &stmt, 0) != SQLITE_OK) {
+		fprintf(stderr, "Preparation failed (get count): %s\n", sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return OPERATION_FAIL;
+	}
+
+	if(sqlite3_step(stmt) == SQLITE_ROW) {
+		*row_count = sqlite3_column_int(stmt, 0);
+		sqlite3_finalize(stmt);
+		return OPERATION_SUCCESS;
+	} else {
+	 	fprintf(stderr, "Reading from result table failed (get count): %s\n", sqlite3_errmsg(db));
+	 	sqlite3_close(db);
+	 	return OPERATION_FAIL;
+	}
+}
+
+int q4_query_DistanceInfo(sqlite3 *db, sqlite3_stmt *stmt, routeInformation *routeInfo, int row_count) {
+	char * sql_stmt =	"SELECT f.airline_id, f.source_airport_id, f.destination_airport_id, "
+								"a1. latitude, a1.longtitude, a2.latitude, a2.longtitude "
+						"FROM routes f, airports a1, airports a2, airlines l "
+						"WHERE "
+							"l.ICAO IS NOT NULL AND "
+							"l.IATA IS NOT NULL AND "
+							"l.callsign IS NOT NULL AND "
+							"l.country IS NOT NULL AND "
+							"l.airline_id = f.airline_id AND "
+							"f.source_airport_id = a1.airport_ID AND "
+							"f.destination_airport_id = a2.airport_id;";
+
+	int rc = sqlite3_prepare_v2(db, sql_stmt, -1, &stmt, 0);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "Preparation failed (Distance Info): %s\n", sqlite3_errmsg(db));
+		sqlite3_close(db);
+		return(OPERATION_FAIL);
+	}
+
+	int row;
+	for(row = 0; row < row_count; row++) {
+		if(sqlite3_step(stmt) == SQLITE_ROW) {
+			routeInfo[row].airline_ID = sqlite3_column_int(stmt, AIRLINE_COL);
+			routeInfo[row].source_airport_ID = sqlite3_column_int(stmt, SRC_AIRPORT_COL);
+			routeInfo[row].destination_airport_ID = sqlite3_column_int(stmt, DEST_AIRPORT_COL);
+			routeInfo[row].distance = 
+				calculateDistance(sqlite3_column_double(stmt, SRC_LAT_COL),
+									sqlite3_column_double(stmt, SRC_LONG_COL),
+									sqlite3_column_double(stmt, DEST_LAT_COL),
+									sqlite3_column_double(stmt, DEST_LONG_COL));	
+		} else {
+			fprintf(stderr, "Reading from result table failed (Distance Info): %s\n", sqlite3_errmsg(db));
+			return (OPERATION_FAIL);
+		}
+	}
+	sqlite3_finalize(stmt);
+	return OPERATION_SUCCESS;
+}
+
+void sort_routes(routeInformation * routeInfo, int count) {
 	int row, j, k;
 	routeInformation temp;
 	for(j = 0; j < count; j++) 
@@ -159,8 +171,7 @@ void sort_routes(routeInformation * routeInfo, int count)
 	}
 }
 
-void print_routes(routeInformation * routeInfo)
-{
+void print_routes(routeInformation * routeInfo) {
 	int row;
 	for(row = 0; row < 10; row++){
 		printf("Route Identifier (Airline ID, Source Airport ID, Destination Airport ID): " 

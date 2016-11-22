@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <sqlite3.h>
+#include "sqlite3.h"
 
 #define AIRLINE_COL 0
 #define SRC_AIRPORT_COL 1

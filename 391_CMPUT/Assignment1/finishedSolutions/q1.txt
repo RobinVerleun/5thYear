@@ -1,0 +1,29 @@
+Is the database normalized?
+
+The short answer to the question is yes - the database and its tables are normalized.
+
+A normalized database has a few axioms which the openflights.org tables follow. The primary
+element to pay attention to is that there is no repeated data within the tables, and that the tables
+follow a number of normalization rules.
+
+	Airports Table:
+		The airports table uses the airport_id column to uniquely gather data relevant to that 
+		airport. From a simple query, all information about an airport can be spawned if the
+		person knows the databases ID for that airport. In addition, each of the columns of airport
+		contains a single piece of information related to that airport, allowing the user
+		to sort the database along those metrics if needed. In other words, the airport_id acts
+		as a primary key and all other elements in a row have a functional relationship with the 
+		primary key.
+
+	Airlines Table:
+		The airlines table follows the exact same schema as the airports table. Airline_id serves
+		as the primary key and creates a functional 1-1 relationship between it and the 
+		collective state of all other columns in the table.
+
+	Routes Table:
+		The routes table is the glue between Airports and Airlines. It itself does not have a
+		primary key to identify individual routes, but each row of the routes table contains
+		a unique permutation of an airline_id and two airport_id's. In addition, these three
+		identifiers create a functional relationship with elements such as the equipment which
+		flies along those routes.
+

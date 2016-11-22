@@ -1,0 +1,62 @@
+SCIENTIFIC EXPLANATION
+	-Explanation = Prediction
+	-Prediction is not important
+
+	Theories use EXPLANATION and PREDICTION
+
+	To evaluate theories,
+		-Explanatory Power
+		-Predictive Power
+
+
+Hempel's Symmetry Thesis
+	-Both explanation and prediction have the same structure
+	-"Any rationally acceptable answer to the question "Why did X occur?" must offer
+	information which shows that X was to be expected - if not definitely, then at least with
+	reasonable certainty."
+	-Good explanations must help to show what is going on
+	-No accidental generalization
+
+Principle of Unity of Nature
+	-Past observation says nothing about the future, unless you add premise to it
+	"Nature behaves in a certain way"
+
+Popper
+	Theory T -> Observation O
+				(Eg, F = ma (T)
+	~O
+	-----------------------------
+	~T
+
+	-Can never say theories are true or even probable - inductive logic has no place
+
+
+Falsificationism:
+	Explanation
+		-Same as inductivism
+		-Can use corroborates theories as premises
+	Prediction
+		-Step in the procedure of 'conjectures and refutations'
+		-For practicle purposes?
+
+Predictive Power:
+	Inductivism offers a great account of prediction
+	How about falsificationism?
+	Salm: "a serious dilemma"
+
+		Popper: Scientific reasoning is purely deductive - but we can still gain basis for predictions
+
+		Problems with Induction:
+			Characterizing: Which conditions give good inference
+			Justification: any way gives circular reasoning
+			Psychology: without logical grounds, why would people rely on it
+			Practical: Which one is more reliable
+
+Falsificationism is based on the logical point
+	-A single counterexample can refute a generalization
+
+
+Predictive Arguments
+	-General statement, singular (observational) statement(s)
+	- General + O1 [+ 02, + 03...] = Future Example
+		-General must refer to the future as well, observations are based on the past

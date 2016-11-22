@@ -15,7 +15,7 @@
 # The toplevel directory of the source tree.  This is the directory
 # that contains this "Makefile.in" and the "configure.in" script.
 #
-TOP = /home/robin/Documents/sqlite-src-3140100
+TOP = /home/robin/Documents/5thYear/391_CMPUT/sqlite-src-3140100
 
 # C Compiler and options for use in building executables that
 # will run on the platform that is doing the build.
@@ -81,7 +81,7 @@ TEMP_STORE = -DSQLITE_TEMP_STORE=1
 # based on configuration. (-DSQLITE_OMIT*, -DSQLITE_ENABLE*).  
 # The same set of OMIT and ENABLE flags should be passed to the 
 # LEMON parser generator and the mkkeywordhash tool as well.
-OPT_FEATURE_FLAGS = 
+OPT_FEATURE_FLAGS =  -DSQLITE_ENABLE_RTREE
 
 TCC += $(OPT_FEATURE_FLAGS)
 

@@ -18,7 +18,12 @@
 
 #define SUCCESS 0
 #define FAILURE 1
+
 #define BUFFSIZE 200
+
+#define INTRODUCTION 0
+#define CORRECT 1
+#define INCORRECT 2
 
 /* Structs */
 typedef struct Questions {
@@ -27,26 +32,35 @@ typedef struct Questions {
 	char answer_b[BUFFSIZE];
 	char answer_c[BUFFSIZE];
 	char answer_d[BUFFSIZE];
-	int correct_answer;
+	char correct_answer;
 	int shown;
 } question;
 
 /* Prototypes */
 void initialize_screen(void);
+void setup_sounds();
+void play_sounds(int);
 void draw_background(void);
 void show_introduction(void);
 void prompt_userQuestion(void);
 void get_prompt_input(void);
 void shuffle_questions(void);
 void show_question_screen(int);
+void process_user_answer(int);
+void show_score(void);
 void read_textfile(char *);
 void cleanup(void);
 
 /* Globals */
 int gameover = 0;
-int num_questions = 0;
-int *random_q;
+
 question *questions = NULL;
+int num_questions = 0;
+int correct_answers = 0;
+int *random_q;
+
+SAMPLE *music, *correct, *incorrect;
+
 
 
 #endif

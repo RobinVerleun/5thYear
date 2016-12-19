@@ -1,7 +1,61 @@
+10
+What programming language is used in this book?
+C
+Pascal
+C++
+Assembly
 1
-Hello this is a test question1!
-answer1
-answer2
-answer3
-answer4
+What is the name of the free multi-platform game library used in this book?
+Treble
+Staccato
+Allegro
+FreeBSD
+3
+What compiler can you use to compile the programs in this book?
+Dev-C++
+Borland C++Builder
+Microsoft Visual C++
+All of the above
+1
+Which operating system does Allegro support?
+Windows
+Linux
+Mac OS X
+All of the above
 4
+Which of the following is a popular strategy game for the PC?
+Counter-Strike
+Splinter Cell
+Civilization IV
+Advance Wars
+3
+What is the most important factor to consider when working on a game?
+Graphics
+Sound effects
+Gameplay
+Level design
+3
+What is the name of the free open-srouce IDE/compiler included on the CD-ROM?
+Visual C++
+Dev-C++
+Watcom C++
+C++Builder
+2
+What is the name of the most popular game development library in the world?
+OpenGL
+DJGPP
+DirectX
+Allegro
+3
+Which of the following books discusses the gaming culture of the late 1980s and early 1990s with strong emphasis on the exploits of id Software?
+Masters of Doom
+The Age of Spiritual Machines
+The Inmates Are Running the Asylum
+Silicon Snake Oil
+1
+According to the author, which of the following is one of the best games made in the 1980s?
+Civilization III
+Counter-Strike
+King's Quest IV: The Perils of Rosella
+Starflight
+1

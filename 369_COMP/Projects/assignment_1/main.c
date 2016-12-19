@@ -24,10 +24,12 @@ int main(void) {
 
 	/* Initialize everything */
 	allegro_init();
+	allegro_404_char = " ";
 	install_keyboard();
 	install_timer();
 
-	//setup_sounds();			/* Initialize sounds for music, correct, fail, and finished */
+	setup_sounds();				/* Initialize sounds for music, correct, fail, and finished */
+	play_sounds(INTRODUCTION);
 	initialize_screen();
 	show_introduction();		/* Create the Introduction screen */
 	prompt_userQuestion(); 		/* Get the users choice of question */
@@ -36,19 +38,15 @@ int main(void) {
 	int cur_q = 0;
 	while(!gameover) {
 		rest(150);
+
+		if(key[KEY_ESC] || cur_q == num_questions) {
+			break;
+		}
 		show_question_screen(cur_q);
+		process_user_answer(cur_q);
+		printf("%d\n", correct_answers);
 		cur_q++;
-		if(key[KEY_ESC] || cur_q == 7) {
-			gameover = 1;
-		} //TODO: HERE, implementing answers and getting user input
-	/*	
-	int i,j;
-	for(i = 0; i < num_questions; i++) {
-		printf("Question: %s\n Answer 1: %s\n Answer 2: %s\n Answer 3: %s\n Answer 4: %s\n Correct: %d\n",
-			questions[i].q, questions[i].answer_a, questions[i].answer_b,
-			questions[i].answer_c, questions[i].answer_d, questions[i].correct_answer); 
 	}
-	*/
 	allegro_exit();
 	return 0;
 }
@@ -64,6 +62,50 @@ void initialize_screen() {
 
 	textprintf_ex(screen, font, 1, 1, WHITE, -1, 
 		"COMP 369 Quiz Machine! - %d x %d", WIDTH, HEIGHT);
+}
+
+void setup_sounds() {
+
+	if(install_sound(DIGI_AUTODETECT, MIDI_NONE,"") != 0) {
+		allegro_message("Error initializing the sound system\n%s\n", allegro_error);
+		return;
+	}
+
+	//load the wav files
+	music = load_sample("./sounds/soundtrack.wav");
+	if(!music) {
+		allegro_message("Error loading music file.");
+		return;
+	}
+	correct = load_sample("./sounds/correct.wav");
+	if(!correct) {
+		allegro_message("Error loading correct soundfile.");
+		return;
+	}
+	incorrect = load_sample("./sounds/incorrect.wav");
+	if(!incorrect) {
+		allegro_message("Error loading incorrect soundfile.");
+		return;
+	}
+}
+
+void play_sounds(int value) {
+	int panning = 128;
+	int pitch = 1000;
+	int volume = 128;
+
+	if(value == INTRODUCTION) {
+		play_sample(music, volume, panning, pitch, TRUE);
+		return;
+	}
+	if(value == CORRECT) {
+		play_sample(correct, volume, panning, pitch, FALSE);
+		return;
+	}
+	if(value == INCORRECT) {
+		play_sample(incorrect, volume, panning, pitch, FALSE);
+	}
+
 }
 
 void draw_background() {
@@ -98,11 +140,17 @@ void show_introduction() {
 	textprintf_centre_ex(screen, font, local_w, local_h + 80, WHITE, -1,
 		"Press ENTER to continue.");
 
-	while(!key[KEY_ENTER]) {}
+	while(!key[KEY_ENTER] && !key[KEY_ESC]) {
+		if(key[KEY_ESC]) {
+			gameover = 1;
+			return;
+		}
+	}
 	return;
 }
 
 void prompt_userQuestion() {
+	
 	draw_background();
 
 	int local_w = WIDTH / 2;
@@ -153,6 +201,8 @@ void prompt_userQuestion() {
 }
 
 void get_prompt_input() {
+
+	clear_keybuf();
 
 	while(1) {
 
@@ -218,10 +268,16 @@ void get_prompt_input() {
 }
 
 void shuffle_questions() {
+
 	random_q = malloc(num_questions * sizeof(int));
 	int i,j,k;
     int aux;
     srand(time(NULL));
+
+    if(1 == num_questions) {
+    	random_q[0] = 0;
+    	return;
+    }
 
     for(i = 0; i < num_questions; i++) {
     	random_q[i] = i;
@@ -236,7 +292,6 @@ void shuffle_questions() {
     {
         do
         {	
-        	
             j=rand() % num_questions;
             k=rand() % num_questions;
         } while (j == k);
@@ -246,19 +301,93 @@ void shuffle_questions() {
         random_q[k] = aux;
     }
 }
+
 void show_question_screen(int index) {
+	
 	draw_background();
+	show_score();
 
 	int local_w = WIDTH / 2;
 	int local_h = HEIGHT * 0.4;
+	int column1 = WIDTH * 0.4;
+	int column2 = WIDTH * 0.55;
 
-	textprintf_centre_ex(screen, font, local_w, local_h, WHITE, -1,
-		"%s",questions[random_q[index]].q);
+	int q_len = strlen(questions[random_q[index]].q);
 
 
-	while(!key[KEY_ENTER]) {}
-	rest(300);
+	if(q_len > 75) {	
+		
+		int i, last_space;
+		char temp1[q_len/2 + 1];
+		char temp2[q_len/2 + 1];
+		memset(temp1, '\0', q_len/2 + 1);
+		memset(temp2, '\0', q_len/2 + 1);
+
+		for(int i = 0; i < 75; i++) {
+			if(questions[random_q[index]].q[i] == ' ') {
+				last_space = i;
+			}
+		}
+		strncpy(temp1, questions[random_q[index]].q, last_space);
+		strncpy(temp2, &questions[random_q[index]].q[last_space], q_len - last_space);
+
+		textprintf_centre_ex(screen, font, local_w, local_h, WHITE, -1,
+			"%s", temp1);	
+		textprintf_centre_ex(screen, font, local_w, local_h + 10, WHITE, -1,
+			"%s", temp2);
+
+	} else {
+
+		textprintf_centre_ex(screen, font, local_w, local_h, WHITE, -1,
+			"%s", questions[random_q[index]].q);
+	}
+
+	textprintf_ex(screen, font, column1, local_h + 50, WHITE, -1,
+		"1) %s", questions[random_q[index]].answer_a);
+	textprintf_ex(screen, font, column1, local_h + 70, WHITE, -1,
+		"2) %s", questions[random_q[index]].answer_b);
+	textprintf_ex(screen, font, column1, local_h + 90, WHITE, -1,
+		"3) %s", questions[random_q[index]].answer_c);
+	textprintf_ex(screen, font, column1, local_h + 110, WHITE, -1,
+		"4) %s", questions[random_q[index]].answer_d);
+
 	return;
+}
+
+void process_user_answer(int index) {
+
+	clear_keybuf();
+	int u_input;
+	char u_answer;
+
+	while(1) {
+
+		u_input = readkey();
+		u_input = scancode_to_ascii(u_input >> 8);
+		u_answer = (char)u_input;
+
+		if(u_answer == '1' || u_answer == '2' || u_answer == '3' || u_answer == '4') {
+			if(u_answer == questions[random_q[index]].correct_answer){
+				correct_answers++;
+				play_sounds(CORRECT);
+				//TODO: Show correct answer screen?
+				break;
+			} else { 
+				//TODO: Show incorrect answer screen?
+				play_sounds(INCORRECT);
+				break;
+			}
+		}
+	}
+}
+
+void show_score() {
+	int width = WIDTH * 0.45;
+	textprintf_ex(screen, font, width - 10, HEIGHT * 0.2, WHITE, -1,
+		"%d", correct_answers);
+	textprintf_ex(screen, font, width + 10, HEIGHT * 0.22, WHITE, -1,
+		"%d", num_questions);
+	line(screen, width + 10, HEIGHT * 0.2, width - 10, HEIGHT * 0.24, WHITE);
 }
 
 void read_textfile(char *filepath) {
@@ -270,6 +399,7 @@ void read_textfile(char *filepath) {
 	
 	ptr_file = fopen(filepath, "r");
 	if(!ptr_file){
+		fprintf(stderr, "Could not open file %s\n", filepath);
 		return;
 	}
 	
@@ -302,7 +432,7 @@ void read_textfile(char *filepath) {
 				if(j == 4)
 					strcpy(cur_question.answer_d, buf);
 				if(j == 5)
-					cur_question.correct_answer = atoi(buf);
+					cur_question.correct_answer = buf[0];
 			}
 		}
 

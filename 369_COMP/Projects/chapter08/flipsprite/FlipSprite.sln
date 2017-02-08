@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FlipSprite", "FlipSprite.vcproj", "{D7D096ED-93ED-4FA7-BC3C-2DD28E792067}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D7D096ED-93ED-4FA7-BC3C-2DD28E792067}.Debug.ActiveCfg = Debug|Win32
+		{D7D096ED-93ED-4FA7-BC3C-2DD28E792067}.Debug.Build.0 = Debug|Win32
+		{D7D096ED-93ED-4FA7-BC3C-2DD28E792067}.Release.ActiveCfg = Release|Win32
+		{D7D096ED-93ED-4FA7-BC3C-2DD28E792067}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

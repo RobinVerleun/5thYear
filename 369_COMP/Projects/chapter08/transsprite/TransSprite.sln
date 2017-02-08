@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TransSprite", "TransSprite.vcproj", "{050D6213-CF33-47A8-B275-4837F046896B}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{050D6213-CF33-47A8-B275-4837F046896B}.Debug.ActiveCfg = Debug|Win32
+		{050D6213-CF33-47A8-B275-4837F046896B}.Debug.Build.0 = Debug|Win32
+		{050D6213-CF33-47A8-B275-4837F046896B}.Release.ActiveCfg = Release|Win32
+		{050D6213-CF33-47A8-B275-4837F046896B}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: DrawSprite - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSPC45.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/DrawSprite.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Book Projects\All In One\sources\msvc\chapter08\drawsprite\DrawSprite\main.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSPC45.tmp" 
+Creating command line "link.exe alleg.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/DrawSprite.pdb" /debug /machine:I386 /out:"Debug/DrawSprite.exe" /pdbtype:sept  ".\Debug\main.obj" "
+<h3>Output Window</h3>
+Compiling...
+main.c
+Linking...
+
+
+
+<h3>Results</h3>
+DrawSprite.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

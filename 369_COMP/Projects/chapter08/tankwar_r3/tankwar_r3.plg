@@ -1,0 +1,27 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: tankwar_r3 - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSPCB3.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/tankwar_r3.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Book Projects\All In One\sources\msvc\chapter08\tankwar_r3\tankwar_r3\main.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSPCB3.tmp" 
+Creating command line "link.exe alleg.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/tankwar_r3.pdb" /debug /machine:I386 /out:"Debug/tankwar_r3.exe" /pdbtype:sept  ".\Debug\main.obj" "
+<h3>Output Window</h3>
+Compiling...
+main.c
+Linking...
+
+
+
+<h3>Results</h3>
+tankwar_r3.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

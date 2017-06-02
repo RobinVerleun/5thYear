@@ -1,0 +1,50 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: tankwar - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSP19D1.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/tankwar.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\Book Projects\All In One\sources\chapter12\tankwar_r7\bullet.c"
+"D:\Book Projects\All In One\sources\chapter12\tankwar_r7\input.c"
+"D:\Book Projects\All In One\sources\chapter12\tankwar_r7\main.c"
+"D:\Book Projects\All In One\sources\chapter12\tankwar_r7\mappyal.c"
+"D:\Book Projects\All In One\sources\chapter12\tankwar_r7\setup.c"
+"D:\Book Projects\All In One\sources\chapter12\tankwar_r7\tank.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSP19D1.tmp" 
+Creating temporary file "C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSP19D2.tmp" with contents
+[
+alleg.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/tankwar.pdb" /debug /machine:I386 /out:"Debug/tankwar.exe" /pdbtype:sept 
+".\Debug\bullet.obj"
+".\Debug\input.obj"
+".\Debug\main.obj"
+".\Debug\mappyal.obj"
+".\Debug\setup.obj"
+".\Debug\tank.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\Jonathan\LOCALS~1\Temp\RSP19D2.tmp"
+<h3>Output Window</h3>
+Compiling...
+bullet.c
+input.c
+main.c
+mappyal.c
+d:\book projects\all in one\sources\chapter12\tankwar_r7\mappyal.c(276) : warning C4018: '==' : signed/unsigned mismatch
+d:\book projects\all in one\sources\chapter12\tankwar_r7\mappyal.c(279) : warning C4018: '==' : signed/unsigned mismatch
+d:\book projects\all in one\sources\chapter12\tankwar_r7\mappyal.c(342) : warning C4018: '!=' : signed/unsigned mismatch
+setup.c
+tank.c
+Linking...
+
+
+
+<h3>Results</h3>
+tankwar.exe - 0 error(s), 3 warning(s)
+</pre>
+</body>
+</html>

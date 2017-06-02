@@ -1,0 +1,61 @@
+10
+What is the best way to get started creating a new game?
+Write the source code for the prototype
+Create a game design document
+Hire the cast and crew
+Play other games to engender some inspiration
+4
+What types of games are full of creativity and interesting technology that PC gamers often fail to notice?
+Console games
+Arcade Games
+PC games
+Board games
+1
+What phrase best describes the additional features and extras in a game?
+Bonus levels
+Easter eggs
+Bells and whistles
+Updates and patches
+3
+What is usually the most complicated core component of a game, also called the graphics renderer?
+The DirectX library
+The Allegro library
+The double-budder
+The game engine
+4
+What is the name of an initial demonstration of a game that presents the basic gameplay elements before the actual game has been completed?
+Beta
+Prototype
+Demo
+Release
+2
+What is the name of the document that contains the blueprints for a game?
+Game document
+Blueprint document
+Design document
+Construction document
+3
+What are the two types of game designs presented in this chapter?
+Mini and complete
+Partial and full
+Prototype and final
+Typical and sarcastic
+1
+What does NPC stand for?
+Non-Pertinent Character
+Non-Practical Condition
+Non-Perfect Caricature
+Non-Player Character
+4
+What are the chances of a necomer finding a job as a full-time game programmer or designer?
+Guaranteed
+Pretty good
+Questionable
+Negligible
+4
+What is the most important aspect of game development?
+Design
+Artwork
+Programming
+Implementation
+1

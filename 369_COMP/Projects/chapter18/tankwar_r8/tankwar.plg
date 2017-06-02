@@ -1,0 +1,45 @@
+<html>
+<body>
+<pre>
+<h1>Build Log</h1>
+<h3>
+--------------------Configuration: tankwar - Win32 Debug--------------------
+</h3>
+<h3>Command Lines</h3>
+Creating temporary file "C:\DOCUME~1\ADMINI~1.PRE\LOCALS~1\Temp\RSP35.tmp" with contents
+[
+/nologo /MLd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_MBCS" /Fp"Debug/tankwar.pch" /YX /Fo"Debug/" /Fd"Debug/" /FD /GZ /c 
+"D:\All In One 3E\chapters\chapter18\tankwar_r8\bullet.c"
+"D:\All In One 3E\chapters\chapter18\tankwar_r8\input.c"
+"D:\All In One 3E\chapters\chapter18\tankwar_r8\main.c"
+"D:\All In One 3E\chapters\chapter18\tankwar_r8\setup.c"
+"D:\All In One 3E\chapters\chapter18\tankwar_r8\tank.c"
+]
+Creating command line "cl.exe @C:\DOCUME~1\ADMINI~1.PRE\LOCALS~1\Temp\RSP35.tmp" 
+Creating temporary file "C:\DOCUME~1\ADMINI~1.PRE\LOCALS~1\Temp\RSP36.tmp" with contents
+[
+alleg.lib /nologo /subsystem:windows /incremental:yes /pdb:"Debug/tankwar.pdb" /debug /machine:I386 /out:"Debug/tankwar.exe" /pdbtype:sept 
+".\Debug\bullet.obj"
+".\Debug\input.obj"
+".\Debug\main.obj"
+".\Debug\mappyal.obj"
+".\Debug\setup.obj"
+".\Debug\tank.obj"
+]
+Creating command line "link.exe @C:\DOCUME~1\ADMINI~1.PRE\LOCALS~1\Temp\RSP36.tmp"
+<h3>Output Window</h3>
+Compiling...
+bullet.c
+input.c
+main.c
+setup.c
+tank.c
+Linking...
+
+
+
+<h3>Results</h3>
+tankwar.exe - 0 error(s), 0 warning(s)
+</pre>
+</body>
+</html>

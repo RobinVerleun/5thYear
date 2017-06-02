@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tankwar", "tankwar.vcproj", "{31D7E75D-C3C0-4B65-BE8A-8BED69951D1A}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{31D7E75D-C3C0-4B65-BE8A-8BED69951D1A}.Debug.ActiveCfg = Debug|Win32
+		{31D7E75D-C3C0-4B65-BE8A-8BED69951D1A}.Debug.Build.0 = Debug|Win32
+		{31D7E75D-C3C0-4B65-BE8A-8BED69951D1A}.Release.ActiveCfg = Release|Win32
+		{31D7E75D-C3C0-4B65-BE8A-8BED69951D1A}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,4 @@
+member(A,[A|_]).
+member(A,[B|L]) :- A \== B, member(A,L).
+a(X,L,L) :- member(X,L), !.
+a(X,L,[X|L]).
